@@ -1,0 +1,26 @@
+-- Online SQL Editor to Run SQL Online.
+-- Use the editor to create new tables, insert data and all other SQL operations.
+
+SELECT Orders.order_id,
+Customers.customer_id, Orders.item from Orders
+inner join Customers ON
+orders.customer_id = Customers.customer_id;
+
+-- 
+SELECT Customers.customer_id, first_name, amount from Customers Inner JOIN Orders on Customers.customer_id = Orders.customer_id;
+
+select * from
+Customers left join Orders On 
+Customers.customer_id = Orders.customer_id;
+
+--Select * from Orders RIGHT JOIN Orders ON  customers.customer_id = Orders.Customer_id;
+-- right join isnt supported but its is the right way to use this(?)
+-- Select * from Orders RIGHT JOIN Orders ON  customers.customer_id = Orders.Customer_id;
+
+
+--CARTESIAN JOINS
+
+SELECT first_name, amount from Customers, Orders;
+
+-- Transaction is a unit of work taht is performed agaisnt a database. THE unit of work can
+-- be creatign a record or updating a record or deleting a record from the table.
