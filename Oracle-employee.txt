@@ -1,0 +1,74 @@
+CREATE TABLE employee (
+    EmployeeID VARCHAR2(10) PRIMARY KEY,
+    FirstName VARCHAR2(20),
+    LastName VARCHAR2(20),
+    Gender CHAR(1),
+    DateofBirth DATE,
+    Designation VARCHAR2(20),
+    DepartmentName VARCHAR2(20),
+    ManagerId VARCHAR2(10),
+    JoinedDate DATE,
+    Salary NUMBER(10)
+);
+
+INSERT INTO employee VALUES
+('001','Season','Maharjan','M',DATE '1996-04-02','Engineer',
+'Software Engineering','002',DATE '2022-11-02',5000000000);
+
+INSERT INTO employee VALUES
+('003','Srijana','Maharjan','F',DATE '2000-04-02','Manager',
+'Software Engineering','005',DATE '2025-11-02',9000000);
+
+INSERT INTO employee VALUES
+('004','Rain','Khadka','M',DATE '1990-12-01','Manager',
+'Software Engineering','005',DATE '2015-03-15',1500000);
+
+INSERT INTO employee VALUES
+('005','Raina','Tamang','F',DATE '1994-12-01','Senior Manager',
+'Software Engineering','002',DATE '2015-03-15',1500000);
+SELECT * FROM employee;
+
+
+UPDATE employee
+SET Gender='M'
+WHERE EmployeeID='003';
+
+SELECT FirstName,
+SYSDATE AS CurrentDate,
+DateofBirth,
+TRUNC(MONTHS_BETWEEN(SYSDATE,DateofBirth)/12) AS Age
+FROM employee
+WHERE TRUNC(MONTHS_BETWEEN(SYSDATE,DateofBirth)/12) > 25;
+
+SELECT *
+FROM employee
+WHERE DateofBirth = (SELECT MIN(DateofBirth) FROM employee);
+
+SELECT *
+FROM employee
+WHERE DateofBirth = (SELECT MAX(DateofBirth) FROM employee);
+
+SELECT DepartmentName, MAX(Salary) AS MaxSalary
+FROM employee
+GROUP BY DepartmentName;
+
+SELECT DepartmentName, MIN(Salary) AS MinSalary
+FROM employee
+GROUP BY DepartmentName;
+
+SELECT *
+FROM employee
+WHERE EmployeeID IN (SELECT ManagerID FROM employee);
+
+UPDATE employee
+SET FirstName='snmn'
+WHERE EmployeeID='003';
+
+DELETE FROM employee
+WHERE FirstName='Rain';
+
+SELECT * FROM employee
+WHERE FirstName LIKE 'S%';
+
+SELECT * FROM employee
+WHERE FirstName LIKE '%a';
